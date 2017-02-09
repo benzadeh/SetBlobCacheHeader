@@ -13,10 +13,10 @@ namespace AzureCDN
         static void Main()
         {
             var accountName = "cloudprograming";
-            var accountKey = "8dsawYJgjl6/6P4XCN3q9EUWmwPupEtrjHBTZ3pFxe7EPThkgeaV7MDYVpARcHin77OVUPWr8G7Z/IJkAeeTKQ==";
+            var accountKey = "primary-key";
 
             //set CacheControl to one hour expiration
-            var cacheControl = "public, max-age=50";
+            var cacheControl = "public, max-age=3600";
 
             try
             {
