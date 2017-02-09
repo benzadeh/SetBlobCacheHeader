@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 
-namespace AzureCDN
+namespace AzureBlobConfig
 {
     class Program
     {
@@ -15,7 +15,7 @@ namespace AzureCDN
             var accountName = "cloudprograming";
             var accountKey = "primary-key";
 
-            //set CacheControl to one hour expiration
+            //Here we set CacheControl to one hour expiration
             var cacheControl = "public, max-age=3600";
 
             try
@@ -32,14 +32,11 @@ namespace AzureCDN
                     if (permissions.PublicAccess == BlobContainerPublicAccessType.Blob || permissions.PublicAccess == BlobContainerPublicAccessType.Container)
                     {
                         Console.WriteLine($"Container {container.Name} is a public container or has public blobs, proceeding.");
-                        //we want to get a flat listing of blobs, since we're going to iterate them all
                         foreach (var blobItem in container.ListBlobs(null, true))
                         {
-                            //we only want to cache-control block blobs
                             if (blobItem is CloudBlockBlob)
                             {
-                                //cast IListBlobItem to CloudBlockBlob
-                                var blob = (CloudBlockBlob)blobItem;
+\                                var blob = (CloudBlockBlob)blobItem;
                                 if (blob.Exists())
                                 {
                                     Console.WriteLine($"Blob {blob.Name} is a CloudBlockBlob and it exists. Setting CacheControl to {cacheControl}");
